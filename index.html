@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Very Simple To Do List</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+
+<body>
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <h1>Welcome to the To Do App!</h1>
+    <div ng-controller="MainController">
+        <div class="form-horizontal">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Form Name</legend>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Text Input</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md" ng-model="toDoItem">
+                        <span class="help-block">help</span>
+                    </div>
+                </div>
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+                    <div class="col-md-4">
+                        <select id="selectbasic" name="selectbasic" class="form-control" ng-model="priority">
+                            <option value="1 ">High</option>
+                            <option value="2 ">Medium</option>
+                            <option value="3">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Button -->
+                <div class="form-group ">
+                    <label class="col-md-4 control-label " for="singlebutton ">Single Button</label>
+                    <div class="col-md-4 ">
+                        <button id="singlebutton " name="singlebutton " class="btn btn-primary " ng-click="addToDoItem() ">Button</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="toDoList container ">
+            <div class="sortButtons container">
+                <button ng-click="sortByType = 'name' ">Sort By Name</button>
+                <button ng-click="sortByType = 'priorityLevel'">Sort By High Priority</button>
+                <button ng-click="sortByType = '-priorityLevel'">Sort By Low Priority</button>
+            </div>
+            <div class="toDoListTable ">
+                <table class="table table-bordered container ">
+                    <tr>
+                        <th>To Do Item</th>
+                        <th>Priority number</th>
+                    </tr>
+                    <tr ng-repeat="item in toDoList | orderBy:sortByType" ng-class="chooseClass(item)">
+                        <td>{{item.name}}</td>
+                        <td>{{item.priorityLevel}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- inject:js -->
+    <script src="/app/app.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
